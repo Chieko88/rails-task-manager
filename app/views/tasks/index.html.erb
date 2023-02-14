@@ -1,0 +1,26 @@
+<div class="container mt-3">
+  <h1>My tasks</h1>
+
+  <div>
+    <% @tasks.each do |task|%>
+      <% if task.completed %>
+        <div class="d-flex align-items-center my-3">
+          <i class="fa-regular fa-square-check me-2"></i>
+          <%= link_to task.title, task_path(task) %>
+          <%= link_to task_path(task), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete #{task.title}?" }, class: 'text-dark' do %>
+            <i class="fa-solid fa-trash-can mx-2"></i>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="d-flex align-items-center my-3">
+          <i class="fa-regular fa-square me-2"></i>
+          <%= link_to task.title, task_path(task) %>
+          <%= link_to task_path(task), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete #{task.title}?" }, class: 'text-dark' do %>
+            <i class="fa-solid fa-trash-can mx-2"></i>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <%= link_to '+ Add a new task', new_task_path %>
+</div>
